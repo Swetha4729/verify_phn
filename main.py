@@ -64,3 +64,7 @@ def verify_uk_phn(phone_number: str) -> Dict[str, Any]:
             "status": "error",
             "message": str(e)
         }
+
+# ── Entry Point ────────────────────────────────────────────────────────────────────
+if __name__ == "__main__":
+    mcp.run(transport="stdio")
