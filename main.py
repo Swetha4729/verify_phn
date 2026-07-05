@@ -65,6 +65,9 @@ def verify_uk_phn(phone_number: str) -> Dict[str, Any]:
             "message": str(e)
         }
 
-# ── Entry Point ────────────────────────────────────────────────────────────────────
 if __name__ == "__main__":
-    mcp.run(transport="stdio")
+    # Fetch the dynamic port assigned by Render
+    port = int(os.environ.get("PORT", "8000"))
+    
+    # Force the server to use SSE transport and bind to the port
+    mcp.run(transport="sse", host="0.0.0.0", port=port)
