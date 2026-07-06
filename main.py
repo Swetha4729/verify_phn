@@ -1,3 +1,24 @@
+import sys
+import subprocess
+
+def install_requirements():
+    """Install required packages on the fly if they are missing."""
+    # List of required pip packages
+    required_packages = ["phonenumbers", "fastmcp"]
+    
+    for package in required_packages:
+        try:
+            # Check if the package is already installed
+            __import__(package)
+        except ImportError:
+            # Output to stderr so it doesn't interfere with standard stdout communication for MCP
+            print(f"Installing missing package: {package}...", file=sys.stderr)
+            subprocess.check_call([sys.executable, "-m", "pip", "install", package])
+
+# 1. Run the installation check before standard imports
+install_requirements()
+
+# 2. Now it is safe to import external libraries
 import os
 from typing import Any, Dict
 import phonenumbers
@@ -67,4 +88,4 @@ def verify_uk_phn(phone_number: str) -> Dict[str, Any]:
         }
 
 if __name__ == "__main__":
-   mcp.run(transport="stdio")
+    mcp.run(transport="stdio")
