@@ -4,7 +4,7 @@ import subprocess
 def install_requirements():
     """Install required packages on the fly if they are missing."""
     # List of required pip packages
-    required_packages = ["phonenumbers", "fastmcp"]
+    required_packages = ["phonenumbers"]
     
     for package in required_packages:
         try:
